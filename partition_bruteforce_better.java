@@ -19,7 +19,6 @@ public class BruteForce {
   private static int[] elements;
 	private static int[] binary;
 	private static boolean overflow;	
-	private static boolean confirmed;
 	
 	private static String s0_config;
 	private static String s1_config;
@@ -88,7 +87,6 @@ public class BruteForce {
 		}
 		savedDiff = n;
 		overflow = false;
-		confirmed = false;
 	} // parseData
 
 	/**
@@ -188,17 +186,13 @@ public class BruteForce {
 		s0_saved_sum = s0_sum;
 		s1_saved_sum = s1_sum;
 		savedDiff = tempDiff;
-		
-		if (savedDiff == 0)
-			confirmed = true;
-		
 	}
 	
 	/**
 	 * Prints the saved configuration.
 	 */
 	private void printConfig() {
-		if (confirmed) displayln("Solution found:");
+		if (savedDiff == 0) displayln("Solution found:");
 		else displayln("Exact solution not found; best possible configuration:");
 		
 		displayln(s0_config + " " + s0_saved_sum);

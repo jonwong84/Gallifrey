@@ -51,7 +51,7 @@ public class GeneticAlg {
 		crossRate = 5;
 		mutateRate = 3;
 		// eliteRate = 25;
-		fitnessThresh = 0.9950;
+		fitnessThresh = 0.9970;
 
 		seed = 3;
 

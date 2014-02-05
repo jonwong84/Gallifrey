@@ -70,10 +70,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	getline(readSecondFile,line2);
 	iss_2.str(line2);
 
-	iss_1 >> itemOne;
-	iss_2 >> itemTwo;
-
-	while (!iss_1.eof() && !iss_2.eof()) {
+	while (	iss_1 >> itemOne && iss_2 >> itemTwo) {
 		// Step 7
 		if (itemOne <= itemTwo) {
 			writeThirdFile << itemOne + " ";
@@ -88,18 +85,15 @@ int _tmain(int argc, _TCHAR* argv[])
 	} // whileLoop
 
 	// Step 9
-	while (!iss_1.eof()) {
-		iss_1 >> itemOne;
+	while (iss_1 >> itemOne)
 		writeThirdFile << itemOne + " ";
-	}
-	while (!iss_1.eof()) {
-		iss_2 >> itemTwo;
+	while (iss_2 >> itemTwo)
 		writeThirdFile << itemTwo + " ";
-	}
 
 	// Step 10
 	readFirstFile.close();
 	readSecondFile.close();
+	writeThirdFile.close();
 
 	return 0;
 }

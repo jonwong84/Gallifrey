@@ -13,7 +13,7 @@ public class ExternalMergeSort {
 		PrintWriter outStream;
 
 		// Step 1
-		System.out.print("Please provide a filename: ");
+		System.out.print("Please provide first filename: ");
 		firstFileName = keyboard.next();
 
 		// Step 2
@@ -37,7 +37,7 @@ public class ExternalMergeSort {
 			itemTwo = 0;
 
 			// Step 3
-			System.out.print("Please provide a filename: ");
+			System.out.print("Please provide second filename: ");
 			secondFileName = keyboard.next();
 
 			// Step 4
@@ -97,6 +97,7 @@ public class ExternalMergeSort {
 			readFirstFile.close();
 			readSecondFile.close();
 			outStream.close();
+			keyboard.close();
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

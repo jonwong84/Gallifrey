@@ -1,4 +1,3 @@
-
 #include "stdafx.h"
 #include <fstream>
 #include <iostream>
@@ -9,75 +8,70 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	// Step 0
 	ifstream readFirstFile, readSecondFile;
-	string firstFileName, secondFileName, thirdFileName, line1, line2;
+	string firstFileName, secondFileName, thirdFileName;
 	int itemOne = 0, itemTwo = 0;
 	ofstream writeThirdFile;
 
 	// Step 1
 	cout << "Please provide first filename: ";
-	getline(cin,firstFileName);
+	getline(cin, firstFileName);
 
 	// Step 2
 	readFirstFile.open(firstFileName);
-	getline(readFirstFile,line1);
-	istringstream iss_1(line1);
-	iss_1 >> itemOne;
-	while (iss_1 >> itemTwo) {
+	readFirstFile >> itemOne;
+	while (readFirstFile >> itemTwo) {
 		if (itemTwo < itemOne) {
 			cout << "File " << firstFileName
 				<< " is not sorted." << endl;
 			return -1;
-		} else
+		}
+		else
 			itemOne = itemTwo;
 	}
 	readFirstFile.close();
-	iss_1.clear();
 	readFirstFile.open(firstFileName);
 	itemOne = 0;
 	itemTwo = 0;
 
 	// Step 3
 	cout << "Please provide second filename: ";
-	getline(cin,secondFileName);
+	getline(cin, secondFileName);
 
 	// Step 4
 	readSecondFile.open(secondFileName);
-	getline(readSecondFile,line2);
-	istringstream iss_2(line2);
-	iss_2 >> itemOne;
-	while (iss_2 >> itemTwo) {
+	readSecondFile >> itemOne;
+	while (readSecondFile >> itemTwo) {
 		if (itemTwo < itemOne) {
 			cout << "File " << secondFileName
 				<< " is not sorted." << endl;
 			return -1;
-		} else
+		}
+		else
 			itemOne = itemTwo;
 	}
-	readFirstFile.close();
-	iss_2.clear();
-	readFirstFile.open(firstFileName);
+	readSecondFile.close();
+	readSecondFile.open(secondFileName);
 	itemOne = 0;
 	itemTwo = 0;
 
 	// Step 5
 	cout << "Please provide an output file name: ";
-	getline(cin,thirdFileName);
+	getline(cin, thirdFileName);
 	writeThirdFile.open(thirdFileName);
 
 	// Step 6
-	getline(readFirstFile,line1);
-	iss_1.str(line1);
-	getline(readSecondFile,line2);
-	iss_2.str(line2);
+	readFirstFile >> itemOne;
+	readSecondFile >> itemTwo;
 
-	while (	iss_1 >> itemOne && iss_2 >> itemTwo) {
+	while (!readFirstFile.eof() && !readSecondFile.eof()) {
 		// Step 7
 		if (itemOne <= itemTwo) {
-			writeThirdFile << itemOne + " ";
-			iss_1 >> itemOne;
-		} else {
-			writeThirdFile << itemTwo + " ";
-			iss_2 >> itemTwo;
+			writeThirdFile << itemOne << " ";
+			readFirstFile >> itemOne;
+		}
+		else {
+			writeThirdFile << itemTwo << " ";
+			readSecondFile >> itemTwo;
 		}
 
 		// Step 8
@@ -85,10 +79,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	} // whileLoop
 
 	// Step 9
-	while (iss_1 >> itemOne)
-		writeThirdFile << itemOne + " ";
-	while (iss_2 >> itemTwo)
-		writeThirdFile << itemTwo + " ";
+	while (readFirstFile >> itemOne)
+		writeThirdFile << itemOne << " ";
+	while (readSecondFile >> itemTwo)
+		writeThirdFile << itemTwo << " ";
 
 	// Step 10
 	readFirstFile.close();
@@ -97,4 +91,3 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	return 0;
 }
-

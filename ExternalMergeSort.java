@@ -103,6 +103,7 @@ public class ExternalMergeSort {
 			readSecondFile.close();
 			outStream.close();
 			keyboard.close();
+			System.out.println("Counter = " + counter);
 
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();

@@ -5,6 +5,7 @@ public class ExternalMergeSort {
 
 	public static void main(String[] args) {
 		// Step 0
+		int counter = 0;
 		Scanner keyboard = new Scanner(System.in);
 		Scanner readFirstFile, readSecondFile;
 		String firstFileName, secondFileName, thirdFileName;
@@ -22,8 +23,10 @@ public class ExternalMergeSort {
 			readFirstFile = new Scanner(firstFile);
 
 			itemOne = readFirstFile.nextInt();
+			counter++;
 			while (readFirstFile.hasNextInt()) {
 				itemTwo = readFirstFile.nextInt();
+				counter++;
 				if (itemTwo < itemOne) {
 					System.out.println("File " + firstFileName
 							+ " is not sorted.");
@@ -45,8 +48,10 @@ public class ExternalMergeSort {
 			readSecondFile = new Scanner(secondFile);
 
 			itemTwo = readSecondFile.nextInt();
+			counter++;
 			while (readSecondFile.hasNextInt()) {
 				itemTwo = readSecondFile.nextInt();
+				counter++;
 				if (itemTwo < itemOne) {
 					System.out.println("File " + secondFileName
 							+ " is not sorted.");

@@ -7,6 +7,7 @@ using namespace std;
 int _tmain(int argc, _TCHAR* argv[])
 {
 	// Step 0
+	int counter = 0;
 	ifstream readFirstFile, readSecondFile;
 	string firstFileName, secondFileName, thirdFileName;
 	int itemOne = 0, itemTwo = 0;
@@ -19,7 +20,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	// Step 2
 	readFirstFile.open(firstFileName);
 	readFirstFile >> itemOne;
+	counter++;
 	while (readFirstFile >> itemTwo) {
+		counter++;
 		if (itemTwo < itemOne) {
 			cout << "File " << firstFileName
 				<< " is not sorted." << endl;
@@ -40,7 +43,9 @@ int _tmain(int argc, _TCHAR* argv[])
 	// Step 4
 	readSecondFile.open(secondFileName);
 	readSecondFile >> itemOne;
+	counter++;
 	while (readSecondFile >> itemTwo) {
+		counter++;
 		if (itemTwo < itemOne) {
 			cout << "File " << secondFileName
 				<< " is not sorted." << endl;
@@ -88,6 +93,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	readFirstFile.close();
 	readSecondFile.close();
 	writeThirdFile.close();
+	cout << "Counter = " << counter << endl;
 
 	return 0;
 }

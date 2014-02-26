@@ -4,6 +4,9 @@ import java.util.Scanner;
 public class ExternalMergeSort {
 
 	public static void main(String[] args) {
+		
+		int counter = 0;
+		
 		// Step 0
 		int counter = 0;
 		Scanner keyboard = new Scanner(System.in);
@@ -74,16 +77,33 @@ public class ExternalMergeSort {
 			itemTwo = readSecondFile.nextInt();
 
 			// Step 8 (looping point)
-			while (readFirstFile.hasNextInt() && readSecondFile.hasNextInt()) {
+			boolean loop = true;
+			while (true) {
+								
 				// Step 7
 				if (itemOne <= itemTwo) {
+					counter++;
 					outStream.print(itemOne + " ");
+					if (!loop) {
+						counter++;
+						outStream.print(itemTwo + " ");
+						break;
+					}
 					itemOne = readFirstFile.nextInt();
+					if (!readFirstFile.hasNextInt())
+						loop = false;
 				} else {
+					counter++;
 					outStream.print(itemTwo + " ");
+					if (!loop) {
+						counter++;
+						outStream.print(itemOne + " ");
+						break;
+					}
 					itemTwo = readSecondFile.nextInt();
+					if (!readSecondFile.hasNextInt())
+						loop = false;
 				}
-
 				// Step 8
 				// return to top of loop
 			} // whileLoop
@@ -91,10 +111,12 @@ public class ExternalMergeSort {
 			// Step 9
 			while (readFirstFile.hasNextInt()) {
 				itemOne = readFirstFile.nextInt();
+				counter++;
 				outStream.print(itemOne + " ");
 			}
 			while (readSecondFile.hasNextInt()) {
 				itemTwo = readFirstFile.nextInt();
+				counter++;
 				outStream.print(itemTwo + " ");
 			}
 
@@ -109,6 +131,7 @@ public class ExternalMergeSort {
 			e.printStackTrace();
 		}
 
+		System.out.println("Counter = " + counter);
 	} // main
 
 } // ExternalMergeSort

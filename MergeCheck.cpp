@@ -60,6 +60,7 @@ bool compareMerged(ifstream& file,map<int,int>& hash) {
 		}
 		else hash[i]--;
 	}
+	file.close();
 	return b;
 } // compareMerged
 

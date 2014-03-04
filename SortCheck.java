@@ -11,9 +11,7 @@ public class SortCheck {
 
 		int counter = 0;
 		boolean sorted = true;
-		Scanner keyboard = new Scanner(System.in);
-		System.out.print("Filename: ");
-		File file = new File(keyboard.next());
+		File file = new File(args[0]);
 		System.out.println("Elements found in file: ");
 		try {
 			Scanner in = new Scanner(file);
@@ -32,6 +30,9 @@ public class SortCheck {
 				} else
 					i = j;
 			} // whileloop
+			
+			in.close();
+			
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
 		} // try-catch
@@ -40,5 +41,6 @@ public class SortCheck {
 		else
 			System.out.println("File " + args[0]
 					+ " has not been properly sorted.");
+
 	} // main
 } // SortCheck

@@ -5,33 +5,32 @@ import java.util.Scanner;
 
 public class MergeCheck {
 
-	static int listCount = 0, mergeCount = 0;
-	static final String tempFile = "~merge.tmp";
+	static int listCount = 0, mergeCount = 0, errors = 0;
 	
 	public static void main (String[] args) throws FileNotFoundException {
 		
-		if (args.length < 3) {
+		if (args.length < 2) {
 			System.out.println("Run as follows:");
-			System.out.println(" java MergeCheck <list1> <list2> <mergedList>");
+			System.out.println(" java MergeCheck <concatList> <mergedList>");
 			return;
 		}
 		
 		File file1 = new File(args[0]);
 		File file2 = new File(args[1]);
-		File file3 = new File(args[2]);
 
-		concat(file1,file2);
-		Hashtable<Integer,Integer> hash = hashParse(file3);
-		File file4 = new File(tempFile);
-		boolean consistent = compareMerged(file4,hash);
-		file4.delete();
+		Hashtable<Integer,Integer> hash = hashParse(file2);
+		boolean consistent = compareMerged(file1,hash);
 
-		if (consistent) System.out.println("All elements in " + args[0] + " and " + args[1] + " accounted for in " + args[2]);
-		else
+		if (consistent) System.out.println("All elements in " + args[0] + " accounted for in " + args[1]);
+		else {
 			System.out.println("Error: inconsistency between sorted lists and merged list.");
+			return;
+		}
+		
 		
 		System.out.println("Total number of elements in sorted lists: " + listCount);
 		System.out.println("Total number of elements in merged list: " + mergeCount);
+		System.out.println("Total number of errors detected: " + errors);
 	} // main
 	
 	public static boolean compareMerged(File file, Hashtable<Integer,Integer> hash) throws FileNotFoundException {
@@ -41,13 +40,16 @@ public class MergeCheck {
 		int i;
 		while (s.hasNextInt()) {
 			i = s.nextInt();
+			listCount++;
 			if (!hash.containsKey(i)) {
 				b = false;
 				System.out.println(" Element " + i + " from sorted lists not found in merged list.");
+				errors++;
 			}
 			else if (hash.get(i) <= 0) {
 				b = false;
 				System.out.println(" Copy of Element " + i + " missing in merged list.");
+				errors++;
 			}
 			else {
 				int t = hash.get(i);
@@ -58,31 +60,6 @@ public class MergeCheck {
 		s.close();
 		return b;	
 	} // compareMerged
-	
-	public static void concat(File file1, File file2) throws FileNotFoundException {
-		
-		Scanner read1 = new Scanner(file1);
-		Scanner read2 = new Scanner(file2);
-		PrintWriter out = new PrintWriter(tempFile);
-		System.out.println("Elements found in concatted sorted lists (CAT):");
-		
-		int get;
-		while (read1.hasNextInt()) {
-			get = read1.nextInt();
-			System.out.println("CAT_" + listCount + ": " + get);
-			out.print(get + " ");
-			listCount++;
-		}
-		while (read2.hasNextInt()) {
-			get = read2.nextInt();
-			System.out.println("CAT_" + listCount + ": " + get);
-			out.print(get + " ");
-			listCount++;
-		}
-		out.close();
-		read1.close();
-		read2.close();
-	} // concat
 	
 	public static Hashtable<Integer, Integer> hashParse(File file) throws FileNotFoundException {
 		

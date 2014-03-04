@@ -12,9 +12,9 @@ int main(int argc, char* argv[])
 
 	int counter = 0;
 	bool sorted = true;
-	cout << "Filename: ";
-	string file;
-	getline(cin,file);
+	//cout << "Filename: ";
+	string file = argv[1];
+	//getline(cin,file);
 	ifstream in(file);
 
 	int i = 0, j = 0;
@@ -34,4 +34,3 @@ int main(int argc, char* argv[])
 	else cout << "File " << file << " has not been properly sorted." << endl;
 	return 0;
 }
-

@@ -165,6 +165,9 @@ int main(int argc, char* argv[])
 	else
 		cout << "ERR: Lists are not equal." << endl;
 
+	printList(good, goodSize);
+	printList(bad, badSize);
+
 	cout << "User Options:" << endl;
 	cout << " 0. Exit" << endl;
 	cout << " 1. Add Coord" << endl;

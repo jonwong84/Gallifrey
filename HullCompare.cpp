@@ -109,6 +109,42 @@ void printList(Point* p, int length) {
 		cout << "(" << p[i].x << "," << p[i].y << ")" << endl;
 } // printList
 
+void sort(Point* p, int length) {
+	int startIndex = 0;
+	int endIndex = length - 1;
+
+	// Step 8
+	while (!(startIndex >= endIndex)) {
+		int minIndex = startIndex;
+		int walkerIndex = startIndex + 1;
+
+		// Step 9
+		while (!(walkerIndex > endIndex)) {
+			if (p[walkerIndex].x < p[minIndex].x)
+				minIndex = walkerIndex;
+			else if (p[walkerIndex].x == p[minIndex].x && p[walkerIndex].y < p[minIndex].y)
+				minIndex = walkerIndex;
+			// Step 10
+			walkerIndex++;
+
+			// Step 11
+			// return to whileLoop
+		}
+
+		// Step 12
+		Point temp = p[startIndex];
+		p[startIndex] = p[minIndex];
+		p[minIndex] = temp;
+
+		// Step 13
+		startIndex++;
+
+		// Step 14
+		// return to whileLoop
+	}
+
+} // sort
+
 int main(int argc, char* argv[])
 {
 	if (argc < 1 || argv[1] == NULL) {
@@ -121,7 +157,8 @@ int main(int argc, char* argv[])
 	badSize = sizeCheck(args[1]);
 	Point* good = parseList(args[0],goodSize);
 	Point* bad = parseList(args[1],badSize);
-
+	sort(good, goodSize);
+	sort(bad, badSize);
 	bool equal = compareLists(good, goodSize, bad, badSize);
 	if (equal)
 		cout << "OK: Lists are equal." << endl;
@@ -143,6 +180,8 @@ int main(int argc, char* argv[])
 		return 0;
 	}
 
+	sort(good, goodSize);
+	sort(bad, badSize);
 	printList(good, goodSize);
 	printList(bad, badSize);
 

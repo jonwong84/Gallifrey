@@ -25,6 +25,8 @@ public class HullCompare {
 			System.out.println("OK: Lists are equal.");
 		else
 			System.out.println("ERR: Lists are not equal.");
+		printList(good);
+		printList(bad);
 		
 		System.out.println("User Options:");
 		System.out.println("0. Exit");

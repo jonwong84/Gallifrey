@@ -1,4 +1,3 @@
-
 public class Point {
 	
 	public int x,y;
@@ -7,4 +6,8 @@ public class Point {
 		x = a;
 		y = b;
 	} // constructor
+	
+		public String toString() {
+		return ("(" + x + "," + y + ")");
+	}
 } // Node

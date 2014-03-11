@@ -18,6 +18,8 @@ public class HullCompare {
 		Point[] good = parseList(args[0],goodSize);
 		Point[] bad = parseList(args[1],badSize);
 		
+		sort(good);
+		sort(bad);
 		boolean equal = compareLists(good, bad);
 		if (equal)
 			System.out.println("OK: Lists are equal.");
@@ -38,6 +40,8 @@ public class HullCompare {
 			return;
 		}
 		
+		sort(good);
+		sort(bad);
 		printList(good);
 		printList(bad);
 		
@@ -48,6 +52,41 @@ public class HullCompare {
 			System.out.println("ERR: Lists are not equal.");
 
 	} // main
+	
+	public static void sort(Point[] p) {
+		boolean b = true;
+		
+		int startIndex = 0;
+        int endIndex = p.length - 1;
+         while (!(startIndex >= endIndex)) {
+            int minIndex = startIndex;
+            int walkerIndex = startIndex + 1;
+
+            // Step 9
+            while (!(walkerIndex > endIndex)) {
+                if (p[walkerIndex].x < p[minIndex].x)
+                    minIndex = walkerIndex;
+                else if (p[walkerIndex].x == p[minIndex].x && p[walkerIndex].y < p[minIndex].y)
+                	minIndex = walkerIndex;
+
+                // Step 10
+                walkerIndex++;
+
+                // Step 11
+                // return to whileLoop
+            }
+            // Step 12
+            Point temp = p[startIndex];
+            p[startIndex] = p[minIndex];
+            p[minIndex] = temp;
+
+            // Step 13
+            startIndex++;
+
+            // Step 14
+            // return to whileLoop
+         }
+	} // sort
 	
 	public static void printList(Point[] p) {
 		System.out.println("Runthrough:");
